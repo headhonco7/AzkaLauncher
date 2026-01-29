@@ -26,14 +26,6 @@ jobs:
       - name: Build Prod Debug APK
         run: ./gradlew assembleProdDebug
 
-      - name: Show generated BuildConfig (prodDebug)
-        run: |
-          echo "=== core:network BuildConfig (prodDebug) ==="
-          sed -n '1,120p' core/network/build/generated/source/buildConfig/prod/debug/com/karuhun/core/network/BuildConfig.java || true
-          echo "=== app BuildConfig (prodDebug) ==="
-          find . -path "*build/generated/source/buildConfig/prod/debug*/**/BuildConfig.*" -maxdepth 8 -print || true
-          grep -R "APP_BASE_URL" -n core/network/build/generated/source/buildConfig/prod/debug/com/karuhun/core/network/BuildConfig.java || true
-
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
